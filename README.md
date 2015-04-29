@@ -2,7 +2,6 @@
 A node meteor package that watches a MySQL database and runs callbacks on matched events.
 
 #Usage
-{
 
 	if (Meteor.isServer) {
 		MySQLEvents.connect({
@@ -41,5 +40,3 @@ A node meteor package that watches a MySQL database and runs callbacks on matche
 		//MySQLEvents.remove(one); //removes the triger
 		//MySQLEvents.stop(); //removes all trigger
 	}
-
-}
