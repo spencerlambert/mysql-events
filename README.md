@@ -3,8 +3,8 @@ A node meteor package that watches a MySQL database and runs callbacks on matche
 
 #Usage
 {
+
 	if (Meteor.isServer) {
-	
 		MySQLEvents.connect({
 			host: '<db_hostname>',
 			user: '<db_username>',
@@ -38,7 +38,8 @@ A node meteor package that watches a MySQL database and runs callbacks on matche
 			console.log('leaderboard.players.name.regexp - column.regexp w/ passed in regexp');
 		}, /Kep/i);
 	
-	//	MySQLEvents.remove(one); //removes the triger
-	//	MySQLEvents.stop(); //removes all trigger
+		//MySQLEvents.remove(one); //removes the triger
+		//MySQLEvents.stop(); //removes all trigger
 	}
+
 }
