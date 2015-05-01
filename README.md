@@ -62,9 +62,9 @@ Make sure the database user has the privilege to read the binlog on database tha
 
 This will listen to any change in the _fieldName_ and if the changed value is equal to __Active__, then triggers the callback. Passing it 2 arguments. Argument value depends on the event.
 
--* Insert: oldRow = null, newRow = rowObject
--* Update: oldRow = rowObject, newRow = rowObject
--* Delete: oldRow = rowObject, newRow = null
+-- Insert: oldRow = null, newRow = rowObject
+-- Update: oldRow = rowObject, newRow = rowObject
+-- Delete: oldRow = rowObject, newRow = null
 
 ###rowObject
     It has the following structure:
