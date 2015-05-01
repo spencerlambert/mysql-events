@@ -67,7 +67,7 @@ This will listen to any change in the _fieldName_ and if the changed value is eq
 - Delete: oldRow = rowObject, newRow = null
 
 ###rowObject
-    It has the following structure:
+It has the following structure:
 
 ```
 {
