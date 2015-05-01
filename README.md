@@ -47,7 +47,7 @@ npm install mysql-events
                       host: 'localhost',
                       user: 'username',
                       password: 'password'
-                    };
+                  };
   var myCon = MySQLEvents(dsn);
 ```
 
@@ -112,11 +112,11 @@ It has the following structure:
 #Watcher Setup
   Its basically a dot '.' seperated string. It can have the following combinations
 
-- database: watches the whole database for changes (insert/update/delete). Which table and row are affected can be inspected from the oldRow & newRow
-- database.table: watches the whole table for changes. Which rows are affected can be inspected from the oldRow & newRow
-- database.table.column: watches for changes in the column. Which database, table & other changed columns can be inspected from the oldRow & newRow
-- database.table.column.value: watches for changes in the column and only trigger the callback if the changed value is equal to the 3rd argument passed to the add().
-- database.table.column.regexp: watches for changes in the column and only trigger the callback if the changed value passes a regular expression test to the 3rd argument passed to the add(). The 3rd argument must be a Javascript Regular Expression Object, like, if you want to match for a starting sting (eg: MySQL) in the value, use /MySQL/i. This will trigger the callback only if the new value starts with MySQL
+- _database_: watches the whole database for changes (insert/update/delete). Which table and row are affected can be inspected from the oldRow & newRow
+- _database.table_: watches the whole table for changes. Which rows are affected can be inspected from the oldRow & newRow
+- _database.table.column_: watches for changes in the column. Which database, table & other changed columns can be inspected from the oldRow & newRow
+- _database.table.column.value_: watches for changes in the column and only trigger the callback if the changed value is equal to the 3rd argument passed to the add().
+- _database.table.column.regexp_: watches for changes in the column and only trigger the callback if the changed value passes a regular expression test to the 3rd argument passed to the add(). The 3rd argument must be a Javascript Regular Expression Object, like, if you want to match for a starting sting (eg: MySQL) in the value, use /MySQL/i. This will trigger the callback only if the new value starts with MySQL
 
 #LICENSE
 MIT
