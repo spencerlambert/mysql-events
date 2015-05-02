@@ -42,7 +42,7 @@ npm install mysql-events
 #Usage
 - Import the module into your application
 ```javascript
-  var MySQLEvents = require('mysql-events');
+var MySQLEvents = require('mysql-events');
 ```
 
 - Instantiate and create a database connection
