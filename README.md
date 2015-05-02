@@ -30,7 +30,7 @@ var watcher =mysqlEventWatcher.add(
       //update code goes here
     }
   }, 
-  'Active'
+  'match this string or regex'
 );
 ```
 
