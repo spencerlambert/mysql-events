@@ -1,33 +1,59 @@
-Package.describe({
-  name: 'mysql-events',
-  version: '0.0.1',
-  // Brief, one-line summary of the package.
-  summary: 'A node meteor package that watches a MySQL database and runs callbacks on matched events',
-  // URL to the Git repository containing the source code for this package.
-  git: 'https://github.com/spencerlambert/mysql-events',
-  // By default, Meteor will default to using README.md for documentation.
-  // To avoid submitting documentation, set this field to null.
-  documentation: 'README.md'
-});
-
-Package.onUse(function(api) {
-  api.versionsFrom('1.0.3.2');
-  api.use([
-	'meteor',
-	'meteor-platform',
-    'meteor-tool',
-	'numtel:mysql'
-  ]);
-  api.addFiles('mysql-events.js');
-  api.export('MySQLEvents');
-});
-
-Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('mysql-events');
-  api.addFiles('mysql-events-tests.js');
-});
-
-Npm.depends({
-  'zongji': '0.3.2'
-});
+{
+  "name": "mysql-events",
+  "description": "A node meteor package that watches a MySQL database and runs callbacks on matched events",
+  "homepage": "https://github.com/spencerlambert/mysql-events",
+  "keywords": [
+    "mysql",
+    "events",
+    "trigger",
+    "notify",
+    "watcher",
+    "callbacks"
+  ],
+  "author": {
+    "name": "Spencer Lambert",
+    "email": "spence@wisptools.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:spencerlambert/mysql-events.git"
+  },
+  "main": "index.js",
+  "version": "1.0.0",
+  "devDependencies": {
+    "underscore": "1.8.3",
+    "zongji": "0.3.2"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "LICENSE"
+  ],
+  "gitHead": "e4743ab712b8ab42ad4ccb48b155034d02394e4d",
+  "bugs": {
+    "url": "https://github.com/spencerlambert/mysql-events/issues"
+  },
+  "_id": "mysql-events@1.0.0",
+  "_shasum": "4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022",
+  "_from": "mysql-events@*",
+  "_npmVersion": "1.4.28",
+  "_npmUser": {
+    "name": "spencerlambert",
+    "email": "spence@wisptools.com"
+  },
+  "maintainers": [
+    {
+      "name": "sirhanshafahath",
+      "email": "sirhan@wisptools.com"
+    }
+  ],
+  "dist": {
+    "shasum": "4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022",
+    "tarball": "http://registry.npmjs.org/mysql-events/-/mysql-events-1.0.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/mysql-events/-/mysql-events-1.0.0.tgz"
+}
