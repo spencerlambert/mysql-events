@@ -7,27 +7,31 @@ This package is based on the [ZongJi](https://github.com/nevill/zongji) node mod
 ```javascript
 var MySQLEvents = require('mysql-events');
 var dsn = {
-                host: _dbhostname_,
-                user: _dbusername_,
-                password: _dbpassword_,
-              };
+  host:     _dbhostname_,
+  user:     _dbusername_,
+  password: _dbpassword_,
+};
 var mysqlEventWatcher = MySQLEvents(dsn);
-var watcher =mysqlEventWatcher.add('myDB.table.field.value', function (oldRow, newRow) {
-                           //row inserted
-                          if (oldRow === null) {
-                            //insert code goes here
-                          }
+var watcher =mysqlEventWatcher.add(
+  'myDB.table.field.value',
+  function (oldRow, newRow) {
+     //row inserted
+    if (oldRow === null) {
+      //insert code goes here
+    }
 
-                           //row deleted
-                          if (newRow === null) {
-                            //delete code goes here
-                          }
+     //row deleted
+    if (newRow === null) {
+      //delete code goes here
+    }
 
-                           //row updated
-                          if (oldRow !== null && newRow !== null) {
-                            //update code goes here
-                          }
-                        }, 'Active');
+     //row updated
+    if (oldRow !== null && newRow !== null) {
+      //update code goes here
+    }
+  }, 
+  'Active'
+);
 ```
 
 #Installation
@@ -43,21 +47,25 @@ npm install mysql-events
 
 - Instantiate and create a database connection
 ```sh
-  var dsn = {
-                      host: 'localhost',
-                      user: 'username',
-                      password: 'password'
-                  };
-  var myCon = MySQLEvents(dsn);
+var dsn = {
+  host:     'localhost',
+  user:     'username',
+  password: 'password'
+};
+var myCon = MySQLEvents(dsn);
 ```
 
 Make sure the database user has the privilege to read the binlog on database that you want to watch on.
 
 - Use the returned object to add new watchers
 ```sh
-  var event1 = myCon.add('dbName.tableName.fieldName.value', function (oldRow, newRow) {
-                            //code goes here
-                          }, 'Active');
+var event1 = myCon.add(
+  'dbName.tableName.fieldName.value',
+  function (oldRow, newRow) {
+    //code goes here
+  }, 
+  'Active'
+);
 ```
 
 This will listen to any change in the _fieldName_ and if the changed value is equal to __Active__, then triggers the callback. Passing it 2 arguments. Argument value depends on the event.
@@ -71,46 +79,45 @@ It has the following structure:
 
 ```
 {
-    database: dbName,
-    table: tableName,
-    affectedColumns: {
-            [{
-                name: fieldName1,
-                charset: String,
-                type: Number
-                 metedata: String
-            },
-            {
-                name: fieldName2,
-                charset: String,
-                type: Number
-                 metedata: String
-            }]
-    },
-    changedColumns: [fieldName1, fieldName2],
-    fields: {
-     fieldName1: recordValue1,
-     fieldName2: recordValue2,
-       ....
-       ....
-       ....
-     fieldNameN: recordValueN
-   }
+  database: dbName,
+  table: tableName,
+  affectedColumns: {
+    [{
+      name:     fieldName1,
+      charset:  String,
+      type:     Number
+      metedata: String
+    },{
+      name:     fieldName2,
+      charset:  String,
+      type:     Number
+      metedata: String
+    }]
+},{
+  changedColumns: [fieldName1, fieldName2],
+  fields: {
+   fieldName1: recordValue1,
+   fieldName2: recordValue2,
+     ....
+     ....
+     ....
+   fieldNameN: recordValueN
+  }
 }
 ```
 
 ##Remove an event
 ```
-  event1.remove();
+event1.remove();
 ```
 
 ##Stop all events on the connection
 ```
-  myCon.stop();
+myCon.stop();
 ```
 
 #Watcher Setup
-  Its basically a dot '.' seperated string. It can have the following combinations
+Its basically a dot '.' seperated string. It can have the following combinations
 
 - _database_: watches the whole database for changes (insert/update/delete). Which table and row are affected can be inspected from the oldRow & newRow
 - _database.table_: watches the whole table for changes. Which rows are affected can be inspected from the oldRow & newRow
