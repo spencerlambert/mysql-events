@@ -146,7 +146,7 @@ var MySQLEvents = function(dsn) {
               }
 
               //call all database callbacks
-              var dbTriggers = _underScore.filter(this.triggers, function(t) {
+              var dbTriggers = _underScore.filter(mySQLEvents.triggers, function(t) {
                 return t.trigger == database;
               });
               _underScore.each(dbTriggers, function(dbTrigger) {
@@ -154,7 +154,7 @@ var MySQLEvents = function(dsn) {
               });
 
               //call all database.table callbacks
-              var tblTriggers = _underScore.filter(this.triggers, function(t) {
+              var tblTriggers = _underScore.filter(mySQLEvents.triggers, function(t) {
                 return t.trigger == database + '.' + table;
               });
               _underScore.each(tblTriggers, function(tblTrigger) {
@@ -164,7 +164,7 @@ var MySQLEvents = function(dsn) {
               //call all database.table.column, database.table.column, database.table.column.value & database.table.column.regexp callbacks
               _underScore.each(changedColumns, function(col) {
                 //value match
-                var colTriggers = _underScore.filter(this.triggers, function(t) {
+                var colTriggers = _underScore.filter(mySQLEvents.triggers, function(t) {
                   return ((t.trigger == database + '.' + table + '.' + col) || (t.trigger == database + '.' + table + '.' + col + '.value'));
                 });
                 _underScore.each(colTriggers, function(colTrigger) {
@@ -176,7 +176,7 @@ var MySQLEvents = function(dsn) {
                   }
                 });
                 //regexp match
-                var colTriggers = _underScore.filter(this.triggers, function(t) {
+                var colTriggers = _underScore.filter(mySQLEvents.triggers, function(t) {
                   return t.trigger == database + '.' + table + '.' + col + '.regexp';
                 });
                 _underScore.each(colTriggers, function(colTrigger) {
@@ -207,17 +207,17 @@ var MySQLEvents = function(dsn) {
           var watcher = trigger.trigger.split('.');
 
           if (watcher.length == 1) {
-            if (_underScore.indexOf(this.databases, watcher[0]) == -1)
-              this.databases.push(watcher[0]);
+            if (_underScore.indexOf(mySQLEvents.databases, watcher[0]) == -1)
+              mySQLEvents.databases.push(watcher[0]);
           }
 
           if (watcher.length == 2) {
-            if (!_underScore.has(this.tables, watcher[0])) {
+            if (!_underScore.has(mySQLEvents.tables, watcher[0])) {
               var map = {};
               map[watcher[0]] = [];
-              _underScore.extend(this.tables, map);
+              _underScore.extend(mySQLEvents.tables, map);
             }
-            this.tables[watcher[0]].push(watcher[1]);
+            mySQLEvents.tables[watcher[0]].push(watcher[1]);
           }
 
           if (watcher.length == 3) {
@@ -225,22 +225,22 @@ var MySQLEvents = function(dsn) {
               type: 'value'
             };
 
-            if (!_underScore.has(this.columns, watcher[0])) {
+            if (!_underScore.has(mySQLEvents.columns, watcher[0])) {
               var db = {};
               db[watcher[0]] = [];
-              _underScore.extend(this.columns, db);
+              _underScore.extend(mySQLEvents.columns, db);
             }
-            if (!_underScore.has(this.columns[watcher[0]], watcher[1])) {
+            if (!_underScore.has(mySQLEvents.columns[watcher[0]], watcher[1])) {
               var table = {};
               table[watcher[1]] = [];
-              _underScore.extend(this.columns[watcher[0]], table);
+              _underScore.extend(mySQLEvents.columns[watcher[0]], table);
             }
-            if (!_underScore.has(this.columns[watcher[0]][watcher[1]], watcher[2])) {
+            if (!_underScore.has(mySQLEvents.columns[watcher[0]][watcher[1]], watcher[2])) {
               var col = {};
               col[watcher[2]] = [];
-              _underScore.extend(this.columns[watcher[0]][watcher[1]], col);
+              _underScore.extend(mySQLEvents.columns[watcher[0]][watcher[1]], col);
             }
-            this.columns[watcher[0]][watcher[1]][watcher[2]].push(map);
+            mySQLEvents.columns[watcher[0]][watcher[1]][watcher[2]].push(map);
           }
 
           if (watcher.length == 4) {
@@ -255,22 +255,22 @@ var MySQLEvents = function(dsn) {
               };
             }
 
-            if (!_underScore.has(this.columns, watcher[0])) {
+            if (!_underScore.has(mySQLEvents.columns, watcher[0])) {
               var db = {};
               db[watcher[0]] = [];
-              _underScore.extend(this.columns, db);
+              _underScore.extend(mySQLEvents.columns, db);
             }
-            if (!_underScore.has(this.columns[watcher[0]], watcher[1])) {
+            if (!_underScore.has(mySQLEvents.columns[watcher[0]], watcher[1])) {
               var table = {};
               table[watcher[1]] = [];
-              _underScore.extend(this.columns[watcher[0]], table);
+              _underScore.extend(mySQLEvents.columns[watcher[0]], table);
             }
-            if (!_underScore.has(this.columns[watcher[0]][watcher[1]], watcher[2])) {
+            if (!_underScore.has(mySQLEvents.columns[watcher[0]][watcher[1]], watcher[2])) {
               var col = {};
               col[watcher[2]] = [];
-              _underScore.extend(this.columns[watcher[0]][watcher[1]], col);
+              _underScore.extend(mySQLEvents.columns[watcher[0]][watcher[1]], col);
             }
-            this.columns[watcher[0]][watcher[1]][watcher[2]].push(map);
+            mySQLEvents.columns[watcher[0]][watcher[1]][watcher[2]].push(map);
           }
         }
       });
