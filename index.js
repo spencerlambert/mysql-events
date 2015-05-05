@@ -19,13 +19,16 @@ var MySQLEvents = function(dsn) {
     columns: {},
 
     //events - unique list of events, thats passed to includeEvents to zongji
-    events: ['tablemap', 'writerows', 'updaterows', 'deleterows'],
+    events: ['tablemap', 'writerows', 'updaterows', 'deleterows', 'rotate'],
 
     //triggers - each MySQLEvents.add() generate an object, stored here
     triggers: [],
 
-    //current event being called
-    currentEvent: '',
+    //current event position being called
+    nextPosition: 0,
+
+    //current binlog file
+    binlogName: '',
 
     //connect - instantiate an ZongJi Class
     connect: function(dsn) {
@@ -34,6 +37,15 @@ var MySQLEvents = function(dsn) {
         !_underScore.isUndefined(dsn.password)
       ) {
         this.zongji = new ZongJi(dsn);
+
+        this.zongji.on('error', function(err) {
+          //console.log("Catched zongji error event", err);
+          //console.log(mySQLEvents);
+        });
+
+        this.zongji.ctrlConnection.on('error', function(err) {
+          //console.log("ZongJI ctrlConnection error", err);
+        });
       }
       else {
         throw new Error('Error: MySQLEvents connect() needs host, user & password');
@@ -87,10 +99,17 @@ var MySQLEvents = function(dsn) {
         this.started = true;
 
         this.zongji.on('binlog', function(evt) {
-          if (evt.getEventName() !== 'tablemap') {
+          if (
+            evt.getEventName() !== 'tablemap' &&
+            evt.getEventName() !== 'rotate' &&
+            mySQLEvents.nextPosition < evt.nextPosition
+          ) {
             //console.log(evt.getEventName());
-            //console.log(evt.rows);
-            //console.log(mySQLEvents);
+            //console.log("evt.nextPosition", evt.nextPosition);
+            //console.log("this.nextPosition", mySQLEvents.nextPosition);
+            //console.log("zongji ctrlConnection", mySQLEvents.zongji.ctrlConnection.state);
+
+            mySQLEvents.nextPosition = evt.nextPosition;
 
             var database = evt.tableMap[evt.tableId].parentSchema;
             var table = evt.tableMap[evt.tableId].tableName;
@@ -187,6 +206,16 @@ var MySQLEvents = function(dsn) {
               });
             }); //rows
           } //tablemap
+
+          //log gets rotated when mysqld restarts, each new binlogfile starts with position 0
+          // if currently watching binlogName != new binlogName, then it shows server restarted, this is required, because if the script is running and mysqld restarts, the whole events from last file is returned, we need to skip the events that we already processed, we use nextPosition for this purpose.
+          if (evt.getEventName() == 'rotate') {
+            //console.log("rotated", evt);//{ timestamp: 0,nextPosition: 0,size: 24,position: 4,binlogName: 'mysql-bin.000107' }
+            if (mySQLEvents.binlogName !== evt.binlogName) {
+              mySQLEvents.binlogName = evt.binlogName;
+              mySQLEvents.nextPosition = 0;
+            }
+          }
         });
       }
       else {
