@@ -1,5 +1,5 @@
 # mysql-events
-A node meteor package that watches a MySQL database and runs callbacks on matched events.
+A Node JS NPM package that watches a MySQL database and runs callbacks on matched events.
 
 This package is based on the [ZongJi](https://github.com/nevill/zongji) node module. Please make sure that you meet the requirements described at [ZongJi](https://github.com/nevill/zongji), like MySQL binlog etc.
 
