@@ -26,7 +26,7 @@
   "main": "index.js",
   "dependencies": {
     "underscore": "1.8.3",
-    "zongji": "0.3.2"
+    "zongji": "0.4.3"
   },
   "scripts": {
     "test": ""
