@@ -1,6 +1,31 @@
 var ZongJi = require('zongji');
 var _underScore = require('underscore');
 
+var RETRY_TIMEOUT = 4000;
+
+function zongjiManager(dsn, options, onBinlog) {
+  var newInst = new ZongJi(dsn, options);
+    newInst.on('error', function(reason) {
+        newInst.removeListener('binlog', onBinlog);
+            setTimeout(function() {
+                  // If multiple errors happened, a new instance may have already been created
+                if(!('child' in newInst)) {
+                        newInst.child = zongjiManager(dsn, Object.assign({}, options, newInst.binlogNextPos
+                    	    ? {  binlogName: newInst.binlogName,
+                        	 binlogNextPos: newInst.binlogNextPos
+                    	      }
+                    	    : {}
+                    	), onBinlog);
+                        newInst.emit('child', newInst.child, reason);
+                        newInst.child.on('child', child => newInst.emit('child', child));
+              }
+          }, RETRY_TIMEOUT);
+    });
+    newInst.on('binlog', onBinlog);
+    newInst.start(options);
+    return newInst;
+}
+
 var MySQLEvents = function(dsn) {
   var mySQLEvents = {
     //Watching - to check whether the zongji.on() has been called or not
@@ -23,6 +48,8 @@ var MySQLEvents = function(dsn) {
 
     //triggers - each MySQLEvents.add() generate an object, stored here
     triggers: [],
+    
+    dsn,
 
     //connect - instantiate an ZongJi Class
     connect: function(dsn) {
@@ -30,11 +57,8 @@ var MySQLEvents = function(dsn) {
         !_underScore.isUndefined(dsn.user) &&
         !_underScore.isUndefined(dsn.password)
       ) {
-        this.zongji = new ZongJi(dsn);
+        this.dsn = dsn;
 
-        this.zongji.on('error', function(err) {
-          //console.log("ZongJi error event", err);
-        });
       }
       else {
         throw new Error('Error: MySQLEvents connect() needs host, user & password');
@@ -84,10 +108,7 @@ var MySQLEvents = function(dsn) {
 
       //check whether ZongJi started
       if (!this.started) {
-        this.zongji.start(map);
-        this.started = true;
-
-        this.zongji.on('binlog', function(evt) {
+        this.zongji = zongjiManager(this.dsn, map, function(evt) {
           if (
             evt.getEventName() === 'writerows' ||
             evt.getEventName() === 'updaterows' ||
@@ -192,6 +213,12 @@ var MySQLEvents = function(dsn) {
             }); //rows
           } //tablemap
         });
+        this.zongji.on('error', function(err) {
+          //console.log("ZongJi error event", err);
+        });
+
+        this.started = true;
+
       }
       else {
         //reset the options
