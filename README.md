@@ -14,7 +14,7 @@ var dsn = {
 var mysqlEventWatcher = MySQLEvents(dsn);
 var watcher =mysqlEventWatcher.add(
   'myDB.table.field.value',
-  function (oldRow, newRow) {
+  function (oldRow, newRow, event) {
      //row inserted
     if (oldRow === null) {
       //insert code goes here
@@ -29,6 +29,9 @@ var watcher =mysqlEventWatcher.add(
     if (oldRow !== null && newRow !== null) {
       //update code goes here
     }
+
+    //detailed event information
+    //console.log(event)
   }, 
   'match this string or regex'
 );
@@ -61,7 +64,7 @@ Make sure the database user has the privilege to read the binlog on database tha
 ```sh
 var event1 = myCon.add(
   'dbName.tableName.fieldName.value',
-  function (oldRow, newRow) {
+  function (oldRow, newRow, event) {
     //code goes here
   }, 
   'Active'
