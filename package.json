@@ -1,6 +1,6 @@
 {
   "name": "mysql-events",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
   "homepage": "https://github.com/spencerlambert/mysql-events",
   "keywords": [
