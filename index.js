@@ -180,7 +180,7 @@ var MySQLEvents = function(dsn, settings) {
                 return t.trigger == database;
               });
               _underScore.each(dbTriggers, function(dbTrigger) {
-                dbTrigger.callback.call(dbTrigger, oldRow, newRow);
+                dbTrigger.callback.call(dbTrigger, oldRow, newRow, evt);
               });
 
               //call all database.table callbacks
@@ -188,7 +188,7 @@ var MySQLEvents = function(dsn, settings) {
                 return t.trigger == database + '.' + table;
               });
               _underScore.each(tblTriggers, function(tblTrigger) {
-                tblTrigger.callback.call(tblTrigger, oldRow, newRow);
+                tblTrigger.callback.call(tblTrigger, oldRow, newRow, evt);
               });
 
               //call all database.table.column, database.table.column, database.table.column.value & database.table.column.regexp callbacks
@@ -199,10 +199,10 @@ var MySQLEvents = function(dsn, settings) {
                 });
                 _underScore.each(colTriggers, function(colTrigger) {
                   if (_underScore.isUndefined(colTrigger.value)) {
-                    colTrigger.callback.call(colTrigger, oldRow, newRow);
+                    colTrigger.callback.call(colTrigger, oldRow, newRow, evt);
                   }
                   else if (row.after[col] == colTrigger.value) {
-                    colTrigger.callback.call(colTrigger, oldRow, newRow);
+                    colTrigger.callback.call(colTrigger, oldRow, newRow, evt);
                   }
                 });
                 //regexp match
@@ -211,7 +211,7 @@ var MySQLEvents = function(dsn, settings) {
                 });
                 _underScore.each(colTriggers, function(colTrigger) {
                   if (!_underScore.isUndefined(colTrigger.value) && colTrigger.value.test(row.after[col])) {
-                    colTrigger.callback.call(colTrigger, oldRow, newRow);
+                    colTrigger.callback.call(colTrigger, oldRow, newRow, evt);
                   }
                 });
               });
