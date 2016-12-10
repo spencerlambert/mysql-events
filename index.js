@@ -26,7 +26,7 @@ function zongjiManager(dsn, options, onBinlog) {
     return newInst;
 }
 
-var MySQLEvents = function(dsn) {
+var MySQLEvents = function(dsn, settings) {
   var mySQLEvents = {
     //Watching - to check whether the zongji.on() has been called or not
     started: false,
@@ -50,6 +50,9 @@ var MySQLEvents = function(dsn) {
     triggers: [],
     
     dsn,
+
+    //settings available - serverId, startAtEnd, binlogName, binlogNextPos, includeEvents, excludeEvents, includeSchema, excludeSchema
+    settings: settings || {},
 
     //connect - instantiate an ZongJi Class
     connect: function(dsn) {
@@ -105,6 +108,8 @@ var MySQLEvents = function(dsn) {
         includeEvents: this.events,
         includeSchema: this.includeSchema()
       };
+      //override default settings
+      Object.assign(map, this.settings);
 
       //check whether ZongJi started
       if (!this.started) {

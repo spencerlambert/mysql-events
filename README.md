@@ -116,6 +116,15 @@ event1.remove();
 myCon.stop();
 ```
 
+##Additional options
+In order to customize the connection options, you can provide your own settings passing a second argument object to the connection function.
+```
+var mysqlEventWatcher = MySQLEvents(dsn, {
+  startAtEnd: false // it overrides default value "true"
+});
+```
+You can find the list of the available options [here](https://github.com/nevill/zongji#zongji-class).
+
 #Watcher Setup
 Its basically a dot '.' seperated string. It can have the following combinations
 
