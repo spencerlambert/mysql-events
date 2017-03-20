@@ -7,19 +7,21 @@ function zongjiManager(dsn, options, onBinlog) {
   var newInst = new ZongJi(dsn, options);
     newInst.on('error', function(reason) {
         newInst.removeListener('binlog', onBinlog);
-            setTimeout(function() {
-                  // If multiple errors happened, a new instance may have already been created
-                if(!('child' in newInst)) {
-                        newInst.child = zongjiManager(dsn, Object.assign({}, options, newInst.binlogNextPos
-                    	    ? {  binlogName: newInst.binlogName,
+    	  newInst.child = false;
+        setTimeout(function() {
+            // If multiple errors happened, a new instance may have already been created
+            if(!newInst.child) {
+                var newInstNext = zongjiManager(dsn, Object.assign({}, options, newInst.binlogNextPos
+                 	    ? {  binlogName: newInst.binlogName,
                         	 binlogNextPos: newInst.binlogNextPos
-                    	      }
-                    	    : {}
-                    	), onBinlog);
-                        newInst.emit('child', newInst.child, reason);
-                        newInst.child.on('child', child => newInst.emit('child', child));
-              }
-          }, RETRY_TIMEOUT);
+                 	      }
+                 	    : {}
+                ), onBinlog);
+                newInst.stop();
+                newInst = newInstNext;
+                newInst.child = true;
+            }
+        }, RETRY_TIMEOUT);
     });
     newInst.on('binlog', onBinlog);
     newInst.start(options);
