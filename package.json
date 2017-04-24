@@ -17,6 +17,9 @@
   "contributors": [
     {
       "name": "sirhanshafahath <sirhan@wisptools.com>"
+    },
+    {
+      "name": "Chakrit Nimmanant <cnimmana@gmail.com>"
     }
   ],
   "repository": {
@@ -26,7 +29,7 @@
   "main": "index.js",
   "dependencies": {
     "underscore": "1.8.3",
-    "zongji": "0.4.3"
+    "zongji": "0.4.4"
   },
   "scripts": {
     "test": ""
