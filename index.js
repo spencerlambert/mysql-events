@@ -6,6 +6,9 @@ var RETRY_TIMEOUT = 4000;
 function zongjiManager(dsn, options, onBinlog) {
   var newInst = new ZongJi(dsn, options);
     newInst.on('error', function(reason) {
+        //Make sure all database connections are cancelled before creating a new one
+        newInst.stop();
+
         newInst.removeListener('binlog', onBinlog);
     	  newInst.child = false;
         setTimeout(function() {
