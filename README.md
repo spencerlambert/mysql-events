@@ -3,7 +3,7 @@ A Node JS NPM package that watches a MySQL database and runs callbacks on matche
 
 This package is based on the [ZongJi](https://github.com/nevill/zongji) node module. Please make sure that you meet the requirements described at [ZongJi](https://github.com/nevill/zongji), like MySQL binlog etc.
 
-#Quick Start
+# Quick Start
 ```javascript
 var MySQLEvents = require('mysql-events');
 var dsn = {
@@ -37,12 +37,12 @@ var watcher =mysqlEventWatcher.add(
 );
 ```
 
-#Installation
+# Installation
 ```sh
 npm install mysql-events
 ```
 
-#Usage
+# Usage
 - Import the module into your application
 ```javascript
 var MySQLEvents = require('mysql-events');
@@ -77,7 +77,7 @@ This will listen to any change in the _fieldName_ and if the changed value is eq
 - Update: oldRow = rowObject, newRow = rowObject
 - Delete: oldRow = rowObject, newRow = null
 
-###rowObject
+### `rowObject`
 It has the following structure:
 
 ```
@@ -109,17 +109,17 @@ It has the following structure:
 }
 ```
 
-##Remove an event
+## Remove an event
 ```
 event1.remove();
 ```
 
-##Stop all events on the connection
+## Stop all events on the connection
 ```
 myCon.stop();
 ```
 
-##Additional options
+## Additional options
 In order to customize the connection options, you can provide your own settings passing a second argument object to the connection function.
 ```
 var mysqlEventWatcher = MySQLEvents(dsn, {
@@ -128,7 +128,7 @@ var mysqlEventWatcher = MySQLEvents(dsn, {
 ```
 You can find the list of the available options [here](https://github.com/nevill/zongji#zongji-class).
 
-#Watcher Setup
+# Watcher Setup
 Its basically a dot '.' seperated string. It can have the following combinations
 
 - _database_: watches the whole database for changes (insert/update/delete). Which table and row are affected can be inspected from the oldRow & newRow
@@ -137,5 +137,5 @@ Its basically a dot '.' seperated string. It can have the following combinations
 - _database.table.column.value_: watches for changes in the column and only trigger the callback if the changed value is equal to the 3rd argument passed to the add().
 - _database.table.column.regexp_: watches for changes in the column and only trigger the callback if the changed value passes a regular expression test to the 3rd argument passed to the add(). The 3rd argument must be a Javascript Regular Expression Object, like, if you want to match for a starting sting (eg: MySQL) in the value, use /MySQL/i. This will trigger the callback only if the new value starts with MySQL
 
-#LICENSE
+# LICENSE
 MIT
