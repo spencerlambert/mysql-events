@@ -3,6 +3,10 @@ I haven't been activly updating this code.  Others have been activley making upd
 
 [https://github.com/rodrigogs/mysql-events](https://github.com/rodrigogs/mysql-events)
 
+Note: This version doesn't follow my documentation, so please reference the supplied example code for setup.
+
+[https://github.com/rodrigogs/mysql-events/blob/master/examples/watchWholeInstance.js](https://github.com/rodrigogs/mysql-events/blob/master/examples/watchWholeInstance.js)
+
 # mysql-events
 A Node JS NPM package that watches a MySQL database and runs callbacks on matched events.
 
