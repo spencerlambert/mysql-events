@@ -1,3 +1,8 @@
+# Update:
+I haven't been activly updating this code.  Others have been activley making updates.  Please also checkout their work.
+
+[https://github.com/rodrigogs/mysql-events](https://github.com/rodrigogs/mysql-events)
+
 # mysql-events
 A Node JS NPM package that watches a MySQL database and runs callbacks on matched events.
 
