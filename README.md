@@ -1,14 +1,6 @@
-# Update:
-I haven't been activly updating this code.  Others have been activley making updates.  Please also checkout their work.
-
-[https://github.com/rodrigogs/mysql-events](https://github.com/rodrigogs/mysql-events)
-
-Note: This version doesn't follow my documentation, so please reference the supplied example code for setup.
-
-[https://github.com/rodrigogs/mysql-events/blob/master/examples/watchWholeInstance.js](https://github.com/rodrigogs/mysql-events/blob/master/examples/watchWholeInstance.js)
-
-# mysql-events
-A Node JS NPM package that watches a MySQL database and runs callbacks on matched events.
+# Baiano's mysql-events
+An updated version of official `mysql-events` module with updated dependencies and new code format.
+(or) A Node JS NPM package that watches a MySQL database and runs callbacks on matched events.
 
 This package is based on the [ZongJi](https://github.com/nevill/zongji) node module. Please make sure that you meet the requirements described at [ZongJi](https://github.com/nevill/zongji), like MySQL binlog etc.
 
