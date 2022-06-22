@@ -30,10 +30,6 @@
         "url": "https://github.com/spencerlambert/mysql-events/issues"
     },
     "bundleDependencies": false,
-    "contributors": [{
-        "name": "sirhanshafahath",
-        "email": "sirhan@wisptools.com"
-    }],
     "dependencies": {
         "underscore": "1.8.3",
     "iconv-lite": "^0.4.13",
@@ -41,10 +37,6 @@
     },
     "deprecated": false,
     "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
-    "files": [
-        "index.js",
-        "zongji.js"
-    ],
     "homepage": "https://github.com/spencerlambert/mysql-events",
     "keywords": [
         "mysql",
