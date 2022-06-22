@@ -43,9 +43,7 @@
     "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
     "files": [
         "index.js",
-        "zongji.js",
-        "LICENSE",
-        "README.md"
+        "zongji.js"
     ],
     "homepage": "https://github.com/spencerlambert/mysql-events",
     "keywords": [
