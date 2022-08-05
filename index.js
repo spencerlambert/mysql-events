@@ -1,4 +1,4 @@
-var ZongJi = require('./zongji');
+var ZongJi = require('@vlasky/zongji');
 var _underScore = require('underscore');
 
 var RETRY_TIMEOUT = 4000;
