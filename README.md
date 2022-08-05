@@ -2,7 +2,7 @@
 An updated version of official `mysql-events` module with updated dependencies and new code format.
 (or) A Node JS NPM package that watches a MySQL database and runs callbacks on matched events.
 
-This package is based on the [ZongJi](https://github.com/nevill/zongji) node module. Please make sure that you meet the requirements described at [ZongJi](https://github.com/nevill/zongji), like MySQL binlog etc.
+This package is based on the [ZongJi](https://www.npmjs.com/package/@vlasky/zongji) node module. Please make sure that you meet the requirements described at [ZongJi](https://github.com/vlasky/zongji), like MySQL binlog etc.
 
 # Quick Start
 ```javascript
