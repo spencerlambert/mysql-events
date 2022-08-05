@@ -31,9 +31,10 @@
     },
     "bundleDependencies": false,
     "dependencies": {
-        "underscore": "1.8.3",
+    "underscore": "1.8.3",
     "iconv-lite": "^0.4.13",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "@vlasky/zongji": "^0.5.8"
     },
     "deprecated": false,
     "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
