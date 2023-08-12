@@ -1,4 +1,4 @@
-# Baiano's mysql-events
+# Diego's mysql-events
 An updated version of official `mysql-events` module with updated dependencies and new code format.
 (or) A Node JS NPM package that watches a MySQL database and runs callbacks on matched events.
 
