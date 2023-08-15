@@ -1,40 +1,61 @@
 {
-  "name": "mysql-events",
-  "version": "0.0.11",
-  "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
-  "homepage": "https://github.com/spencerlambert/mysql-events",
-  "keywords": [
-    "mysql",
-    "events",
-    "trigger",
-    "notify",
-    "watcher",
-    "callbacks"
-  ],
-  "author": {
-    "name": "Spencer Lambert <spence@wisptools.com> (http://wisptools.com)"
-  },
-  "contributors": [
-    {
-      "name": "sirhanshafahath <sirhan@wisptools.com>"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:spencerlambert/mysql-events.git"
-  },
-  "main": "index.js",
-  "dependencies": {
+    "_from": "mysql-events@0.0.11",
+    "_id": "mysql-events@0.0.11",
+    "_inBundle": false,
+    "_integrity": "sha1-BCTNZr6LyBTLUGVf6kgDiPAZwGA=",
+    "_location": "/mysql-events",
+    "_phantomChildren": {},
+    "_requested": {
+        "type": "version",
+        "registry": true,
+        "raw": "mysql-events@0.0.11",
+        "name": "mysql-events",
+        "escapedName": "mysql-events",
+        "rawSpec": "0.0.11",
+        "saveSpec": null,
+        "fetchSpec": "0.0.11"
+    },
+    "_requiredBy": [
+        "/"
+    ],
+    "_resolved": "https://registry.npmjs.org/mysql-events/-/mysql-events-0.0.11.tgz",
+    "_shasum": "0424cd66be8bc814cb50655fea480388f019c060",
+    "_spec": "mysql-events@0.0.11",
+    "author": {
+        "name": "Spencer Lambert",
+        "email": "spence@wisptools.com",
+        "url": "http://wisptools.com"
+    },
+    "bugs": {
+        "url": "https://github.com/spencerlambert/mysql-events/issues"
+    },
+    "bundleDependencies": false,
+    "dependencies": {
     "underscore": "1.8.3",
-    "zongji": "0.4.3"
-  },
-  "scripts": {
-    "test": ""
-  },
-  "license": "MIT",
-  "files": [
-    "index.js",
-    "LICENSE",
-    "README.md"
-  ]
+    "iconv-lite": "^0.4.13",
+    "mysql": "^2.18.1",
+    "@vlasky/zongji": "^0.5.8"
+    },
+    "deprecated": false,
+    "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
+    "homepage": "https://github.com/spencerlambert/mysql-events",
+    "keywords": [
+        "mysql",
+        "events",
+        "trigger",
+        "notify",
+        "watcher",
+        "callbacks"
+    ],
+    "license": "MIT",
+    "main": "index.js",
+    "name": "mysql-events",
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/spencerlambert/mysql-events.git"
+    },
+    "scripts": {
+        "test": ""
+    },
+    "version": "0.0.11"
 }
